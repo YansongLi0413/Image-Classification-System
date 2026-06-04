@@ -1,0 +1,95 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+*.so
+
+# Virtual Environment
+env/
+venv/
+.venv/
+.conda/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data - raw datasets (too large, don't track)
+data/raw/
+
+# Processed data (generated, too large)
+data/processed/
+
+# Model weights (too large)
+saved_models/
+*.pth
+*.pt
+*.h5
+*.keras
+*.onnx
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Django
+backend/staticfiles/
+backend/media/
+backend/static/
+
+# Database
+*.db
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Claude
+.claude/
+
+# Bytecode
+*.pyo
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# PyCharm
+.idea/
+
+# Jupyter Notebook outputs (keep notebooks clean)
+.ipynb_checkpoints/
+
+# Archive
+*.zip
+*.tar.gz
+*.rar
