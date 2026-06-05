@@ -40,10 +40,10 @@ class PredictView(APIView):
             # 保存图片
             image_info = ImageService.save_image(image_file, request.user)
 
-            # 检查缓存
-            cache_key = f'predict:{image_info.image_hash}:{model_name}'
+            # 检查缓存（注意：修改代码后旧缓存可能不含中文名，跳过校验）
+            cache_key = f'predict:v2:{image_info.image_hash}:{model_name}'
             cached = cache_get(cache_key)
-            if cached:
+            if cached and 'predicted_class_cn' in cached:
                 cached['from_cache'] = True
                 return Response(cached)
 
@@ -54,7 +54,8 @@ class PredictView(APIView):
                 dataset_name=dataset_name,
             )
 
-            # 保存预测记录
+            # 保存预测记录（中文名存入 top5_results[0]）
+            cn = result.get('predicted_class_cn', '')
             record = PredictionRecord.objects.create(
                 user=request.user,
                 image=image_info,
