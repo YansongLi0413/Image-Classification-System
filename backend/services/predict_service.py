@@ -56,7 +56,7 @@ class PredictService:
         if cache_key in _MODEL_CACHE:
             return _MODEL_CACHE[cache_key]
 
-        save_dir = Path(__file__).resolve().parent.parent / 'saved_models'
+        save_dir = Path(__file__).resolve().parent.parent.parent / 'saved_models'
         ckpt_path = save_dir / f'{model_name}_{dataset_name}_best.pth'
 
         if not ckpt_path.exists():
@@ -121,7 +121,7 @@ class PredictService:
     @classmethod
     def _get_class_name(cls, dataset_name: str, class_id: int) -> str:
         """获取类别名"""
-        processed_dir = Path(__file__).resolve().parent.parent / 'data' / 'processed'
+        processed_dir = Path(__file__).resolve().parent.parent.parent / 'data' / 'processed'
         split_file = processed_dir / dataset_name / 'split_info.json'
 
         try:
