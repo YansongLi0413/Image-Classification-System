@@ -13,12 +13,14 @@ def custom_exception_handler(exc, context):
     response = exception_handler(exc, context)
 
     if response is not None:
-        # 包装错误响应
+        # 安全获取请求路径
+        request = context.get('request')
+        path = request.path if request else ''
         response.data = {
             'error': True,
             'code': response.status_code,
             'detail': response.data,
-            'path': str(context.get('request', {}).get('path', '')),
+            'path': path,
         }
 
     # 未捕获异常

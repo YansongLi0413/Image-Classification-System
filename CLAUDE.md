@@ -16,6 +16,7 @@
 - 数据集：data\raw\caltech-101 dataset和data\raw\Oxford 102 Flower Dataset
 - 模型：
 - 仓库地址：https://github.com/YansongLi0413/AI_APP
+- 每完成一个关键小任务就要进行git提交
 
 ## 编码规范
 - 风格：遵循 PEP 8。

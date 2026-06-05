@@ -13,8 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class ModelListView(APIView):
-    """GET /api/models/ — 获取可用模型列表"""
-    permission_classes = [IsAuthenticated]
+    """GET /api/models/ — 获取可用模型列表（首页无需登录）"""
+    permission_classes = []  # 允许匿名访问
 
     def get(self, request):
         models = ModelInfo.objects.filter(is_active=True)
