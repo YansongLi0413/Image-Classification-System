@@ -17,9 +17,9 @@ class ViTClassifier(nn.Module):
     def __init__(self, num_classes=102, freeze_backbone=True, dropout=0.2):
         super(ViTClassifier, self).__init__()
 
-        # 加载预训练 ViT
+        # 加载预训练 ViT (IMAGENET1K_V1 使用 224x224 输入)
         self.backbone = models.vit_b_16(
-            weights=models.ViT_B_16_Weights.IMAGENET1K_SWAG_E2E_V1
+            weights=models.ViT_B_16_Weights.IMAGENET1K_V1
         )
 
         # 冻结骨干网络

@@ -19,7 +19,7 @@ class DenseNetClassifier(nn.Module):
 
         # 加载预训练模型
         self.backbone = models.densenet121(
-            weights=models.DenseNet121_Weights.IMAGENET1K_V2
+            weights=models.DenseNet121_Weights.IMAGENET1K_V1
         )
 
         # 冻结骨干网络

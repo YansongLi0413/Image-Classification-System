@@ -110,14 +110,18 @@ class Trainer:
         }
 
     def train(self, train_loader, val_loader, epochs=50, lr=0.001,
-              weight_decay=1e-4, scheduler_patience=5, early_stop_patience=10):
+              weight_decay=1e-4, scheduler_patience=5, early_stop_patience=10,
+              class_weight=None, label_smoothing=0.0):
         """完整训练流程"""
-        criterion = nn.CrossEntropyLoss()
+        criterion = nn.CrossEntropyLoss(
+            weight=class_weight.to(self.device) if class_weight is not None else None,
+            label_smoothing=label_smoothing,
+        )
         optimizer = torch.optim.AdamW(
             self.model.parameters(), lr=lr, weight_decay=weight_decay
         )
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode='max', factor=0.5, patience=scheduler_patience, verbose=True
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer, T_max=epochs, eta_min=lr * 0.01
         )
 
         no_improve = 0
@@ -136,7 +140,7 @@ class Trainer:
             val_acc = val_results['accuracy']
 
             # 学习率调整
-            scheduler.step(val_acc)
+            scheduler.step()
             current_lr = optimizer.param_groups[0]['lr']
 
             # 记录历史

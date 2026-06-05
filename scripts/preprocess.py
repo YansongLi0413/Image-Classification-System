@@ -178,11 +178,14 @@ def process_oxford102():
     with open(cat_to_name_file, 'r', encoding='utf-8') as f:
         cat_to_name = json.load(f)
 
-    # 转换为 int key
+    # 转换为 int key，并转为 0-indexed (原目录名为 1-102)
     cat_to_name = {int(k): v for k, v in cat_to_name.items()}
+    # 创建 0-indexed 映射: 原始ID(1-102) → 0-indexed ID(0-101)
+    original_to_zero = {orig: i for i, orig in enumerate(sorted(cat_to_name.keys()))}
+    idx_to_class = {i: cat_to_name[orig] for orig, i in original_to_zero.items()}
     num_classes = len(cat_to_name)
     logger.info(f"类别数: {num_classes}")
-    logger.info(f"类别名称映射已加载")
+    logger.info(f"类别名称映射已加载 (已转为 0-indexed)")
 
     # 处理 train 目录
     train_dir = dataset_dir / 'train'
@@ -192,8 +195,9 @@ def process_oxford102():
     for class_dir in sorted(train_dir.iterdir(), key=lambda d: int(d.name)):
         if not class_dir.is_dir():
             continue
-        class_id = int(class_dir.name)
-        class_name = cat_to_name.get(class_id, f'class_{class_id}')
+        original_id = int(class_dir.name)
+        class_id = original_to_zero[original_id]  # 转为 0-indexed
+        class_name = cat_to_name.get(original_id, f'class_{original_id}')
         images = sorted([
             str(p) for p in class_dir.iterdir()
             if p.suffix.lower() in ('.jpg', '.jpeg', '.png')
@@ -213,8 +217,9 @@ def process_oxford102():
     for class_dir in sorted(valid_dir.iterdir(), key=lambda d: int(d.name)):
         if not class_dir.is_dir():
             continue
-        class_id = int(class_dir.name)
-        class_name = cat_to_name.get(class_id, f'class_{class_id}')
+        original_id = int(class_dir.name)
+        class_id = original_to_zero[original_id]  # 转为 0-indexed
+        class_name = cat_to_name.get(original_id, f'class_{original_id}')
         images = sorted([
             str(p) for p in class_dir.iterdir()
             if p.suffix.lower() in ('.jpg', '.jpeg', '.png')
@@ -256,8 +261,8 @@ def process_oxford102():
     split_info = {
         'dataset': 'oxford102',
         'num_classes': num_classes,
-        'cat_to_name': {str(k): v for k, v in cat_to_name.items()},
-        'idx_to_class': cat_to_name,
+        'cat_to_name': {str(k): v for k, v in idx_to_class.items()},
+        'idx_to_class': {str(k): v for k, v in idx_to_class.items()},
         'class_counts': {str(k): v for k, v in class_counts.items()},
         'splits': {
             'train': train_images,
