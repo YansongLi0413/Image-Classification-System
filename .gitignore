@@ -93,3 +93,4 @@ dmypy.json
 *.zip
 *.tar.gz
 *.rar
+docs/figures/

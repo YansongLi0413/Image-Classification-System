@@ -193,8 +193,13 @@ def main():
             except Exception as e:
                 logger.error(f"评估失败: {e}", exc_info=True)
 
-    # 保存结果
+    # 合并已有结果后保存
     out_path = ROOT_DIR / 'docs' / 'evaluation_results.json'
+    if out_path.exists():
+        with open(out_path) as f:
+            existing = json.load(f)
+        existing.update(all_results)
+        all_results = existing
     with open(out_path, 'w') as f:
         json.dump(all_results, f, indent=2, ensure_ascii=False)
     logger.info(f"\n评估结果已保存: {out_path}")
