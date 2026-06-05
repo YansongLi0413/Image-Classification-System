@@ -47,7 +47,10 @@
 
       <el-row :gutter="16">
         <el-col :xs="24" :md="8" class="result-main">
-          <el-statistic title="预测类别" :value="result.predicted_class" />
+          <el-statistic title="预测类别">
+            {{ result.predicted_class }}
+            <template v-if="result.predicted_class_cn">（{{ result.predicted_class_cn }}）</template>
+          </el-statistic>
           <el-progress :percentage="Math.round(result.confidence * 100)" :color="confidenceColor" :stroke-width="18">
             <span>{{ (result.confidence * 100).toFixed(1) }}%</span>
           </el-progress>
@@ -57,6 +60,12 @@
           <h4>Top-5 预测结果</h4>
           <el-table :data="result.top5_results" stripe size="small" class="top5-table">
             <el-table-column prop="class_id" label="排名" width="60" type="index" />
+            <el-table-column label="类别" min-width="180">
+              <template #default="{ row }">
+                {{ row.class_name }}
+                <span v-if="row.class_name_cn" style="color:#909399">（{{ row.class_name_cn }}）</span>
+              </template>
+            </el-table-column>
             <el-table-column label="置信度" width="200">
               <template #default="{ row }">
                 <el-progress :percentage="Math.round(row.confidence * 100)" :stroke-width="14" :show-text="true">

@@ -102,16 +102,23 @@ class PredictService:
 
         top5_results = []
         for i in range(5):
+            cid = top5_indices[0][i].item()
+            en, cn = cls._get_class_info(dataset_name, cid)
             top5_results.append({
-                'class_id': top5_indices[0][i].item(),
+                'class_id': cid,
+                'class_name': en,
+                'class_name_cn': cn,
                 'confidence': round(top5_probs[0][i].item(), 4),
             })
 
-        # 获取类别名
-        class_name = cls._get_class_name(dataset_name, top5_indices[0][0].item())
+        # 获取最佳预测类别名
+        class_name_en, class_name_cn = cls._get_class_info(
+            dataset_name, top5_indices[0][0].item()
+        )
 
         return {
-            'predicted_class': class_name,
+            'predicted_class': class_name_en,
+            'predicted_class_cn': class_name_cn,
             'predicted_class_id': top5_indices[0][0].item(),
             'confidence': round(top5_probs[0][0].item(), 4),
             'top5_results': top5_results,
@@ -119,18 +126,31 @@ class PredictService:
         }
 
     @classmethod
-    def _get_class_name(cls, dataset_name: str, class_id: int) -> str:
-        """获取类别名"""
+    def _get_class_info(cls, dataset_name: str, class_id: int) -> tuple:
+        """获取类别名 (英文名, 中文名)"""
         processed_dir = Path(__file__).resolve().parent.parent.parent / 'data' / 'processed'
         split_file = processed_dir / dataset_name / 'split_info.json'
+        cn_file = processed_dir / dataset_name / 'class_names_cn.json'
+
+        en_name = f'class_{class_id}'
+        cn_name = ''
 
         try:
             with open(split_file, 'r', encoding='utf-8') as f:
                 info = json.load(f)
             idx_to_class = info.get('idx_to_class', {})
-            return idx_to_class.get(str(class_id), f'class_{class_id}')
+            en_name = idx_to_class.get(str(class_id), en_name)
         except Exception:
-            return f'class_{class_id}'
+            pass
+
+        try:
+            with open(cn_file, 'r', encoding='utf-8') as f:
+                cn_map = json.load(f)
+            cn_name = cn_map.get(en_name, '')
+        except Exception:
+            pass
+
+        return en_name, cn_name
 
     @classmethod
     def reload_model(cls, model_name: str, dataset_name: str = None):

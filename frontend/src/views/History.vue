@@ -20,7 +20,14 @@
       <el-table-column prop="dataset_name" label="数据集" width="110">
         <template #default="{ row }">{{ row.dataset_name === 'caltech101' ? 'Caltech-101' : 'Oxford 102' }}</template>
       </el-table-column>
-      <el-table-column prop="predicted_class" label="预测类别" min-width="150" />
+      <el-table-column label="预测类别" min-width="180">
+        <template #default="{ row }">
+          {{ row.predicted_class }}
+          <span v-if="row.top5_results?.[0]?.class_name_cn" style="color:#909399">
+            （{{ row.top5_results[0].class_name_cn }}）
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column label="置信度" width="140">
         <template #default="{ row }">
           <el-progress :percentage="Math.round(row.confidence * 100)" :stroke-width="10"
