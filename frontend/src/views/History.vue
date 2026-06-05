@@ -56,7 +56,9 @@ const modelOptions = ['custom_cnn', 'resnet50', 'efficientnet_b1', 'vit_b16', 'd
 
 function getImageUrl(row) {
   if (row.image?.original_path) {
-    const name = row.image.original_path.split(/[\\/]/).pop()
+    // original_path 是服务器上的绝对路径, 提取文件名拼接 URL
+    const parts = row.image.original_path.replace(/\\/g, '/').split('/')
+    const name = parts[parts.length - 1]
     return `/storage/images/original/${name}`
   }
   return ''
