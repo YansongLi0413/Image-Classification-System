@@ -70,6 +70,7 @@ class PredictView(APIView):
             response_data = {
                 'record_id': record.id,
                 'predicted_class': result['predicted_class'],
+                'predicted_class_cn': result.get('predicted_class_cn', ''),
                 'predicted_class_id': result['predicted_class_id'],
                 'confidence': result['confidence'],
                 'top5_results': result['top5_results'],

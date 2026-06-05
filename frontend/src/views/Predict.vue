@@ -47,10 +47,11 @@
 
       <el-row :gutter="16">
         <el-col :xs="24" :md="8" class="result-main">
-          <el-statistic title="预测类别">
+          <div class="predicted-label">预测类别</div>
+          <div class="predicted-class">
             {{ result.predicted_class }}
-            <template v-if="result.predicted_class_cn">（{{ result.predicted_class_cn }}）</template>
-          </el-statistic>
+            <span v-if="result.predicted_class_cn" class="cn-name">（{{ result.predicted_class_cn }}）</span>
+          </div>
           <el-progress :percentage="Math.round(result.confidence * 100)" :color="confidenceColor" :stroke-width="18">
             <span>{{ (result.confidence * 100).toFixed(1) }}%</span>
           </el-progress>
@@ -156,7 +157,9 @@ onMounted(async () => {
 .result-section { margin-top: 32px; }
 .result-section h3 { margin-bottom: 16px; }
 .result-main { text-align: center; }
-.result-main .el-statistic { margin-bottom: 16px; }
+.result-main .predicted-label { font-size: 14px; color: #909399; margin-bottom: 8px; }
+.result-main .predicted-class { font-size: 22px; font-weight: 700; color: #303133; margin-bottom: 16px; }
+.result-main .cn-name { font-size: 16px; font-weight: 400; color: #67c23a; }
 .infer-time { color: #909399; font-size: 13px; margin-top: 12px; }
 .cache-notice { background: #ecf5ff; border: 1px solid #d9ecff; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
 .top5-table { margin-top: 12px; }
