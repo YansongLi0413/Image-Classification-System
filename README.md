@@ -1,4 +1,6 @@
-# AI_APP — 图像分类智能应用
+# Image-Classification-System — 图像分类智能应用
+
+> **GitHub**: https://github.com/YansongLi0413/Image-Classification-System
 
 基于深度学习的图像分类系统，支持 Caltech-101 和 Oxford 102 Flower 两个数据集。
 

@@ -541,6 +541,6 @@ cd backend && python manage.py runserver
 
 > **文档状态**: ✅ 数据清洗与预处理阶段完成
 > **下一阶段**: 模型训练与评估
-> **GitHub**: https://github.com/YansongLi0413/AI_APP
+> **GitHub**: https://github.com/YansongLi0413/Image-Classification-System
 > **分支**: main
 > **提交**: 2edf186 - "feat: 初始化项目结构"

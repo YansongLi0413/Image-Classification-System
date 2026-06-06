@@ -392,5 +392,5 @@ scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
 ---
 
 > **文档状态**: ✅ 训练阶段完成（2026-06-05）
-> **GitHub**: https://github.com/YansongLi0413/AI_APP
+> **GitHub**: https://github.com/YansongLi0413/Image-Classification-System
 > **相关文档**: [数据清洗与预处理报告](data_analysis_and_preprocessing.md)
