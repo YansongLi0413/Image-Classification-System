@@ -41,7 +41,17 @@ Error 401: { "error": "用户名或密码错误" }
 GET /api/auth/me/
 Authorization: Bearer <access_token>
 
-Response: { "id": 1, "username": "testuser", "email": "...", "role": "user", ... }
+Response:
+{
+  "id": 1,
+  "username": "testuser",
+  "email": "test@example.com",
+  "avatar": "",
+  "role": "user",
+  "date_joined": "2026-06-05T12:00:00Z",
+  "last_login": "2026-06-06T08:30:00Z",
+  "predictions_count": 42
+}
 ```
 
 ### 1.4 修改密码

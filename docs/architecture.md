@@ -48,18 +48,35 @@
 
 | 层级 | 技术 | 版本 |
 |------|------|------|
-| 前端框架 | Vue 3 + Vite | 3.x |
+| 前端框架 | Vue 3 + Vite | 3.x / 5.x |
 | UI 组件库 | Element Plus | 2.x |
 | 路由 | Vue Router | 4.x |
 | 状态管理 | Pinia | 2.x |
 | HTTP 客户端 | Axios | 1.x |
-| 后端框架 | Django + DRF | 5.x |
+| 设计系统 | 墨韵科技 Ink-Tech | — |
+| 标题字体 | 思源宋体 (Noto Serif SC) | — |
+| 正文字体 | 苹方 / 微软雅黑 | — |
+| 后端框架 | Django + DRF | 4.2 / 3.14 |
 | 认证 | Simple JWT | 5.x |
-| 数据库 | MySQL (开发可用 SQLite) | 8.x |
-| 缓存 | Redis + django-redis | 7.x |
-| 任务队列 | Celery + Redis | 5.x |
+| 数据库 | SQLite (开发) / MySQL (生产) | 8.x |
+| 缓存 | Redis + django-redis (可选降级为 LocMem) | 7.x |
 | 日志 | Python logging + RotatingFileHandler | — |
 | 部署 | Gunicorn + Nginx (生产) | — |
+
+### 2.1 前端设计令牌
+
+| 令牌类别 | 变量前缀 | 说明 |
+|----------|----------|------|
+| 主色系 | `--ink-*` | 墨蓝 900-50 色阶 |
+| 强调色系 | `--gold-*` | 暖金 900-50 色阶 |
+| 中性色系 | `--warm-*` | 暖调灰 900-50 色阶 |
+| 字体 | `--font-display` / `--font-body` | 思源宋体 / 系统无衬线 |
+| 间距 | `--space-*` | 基于 4px 网格 (1-32) |
+| 阴影 | `--shadow-*` | xs/sm/md/lg/xl + ink/gold |
+| 圆角 | `--radius-*` | xs(4px) → 2xl(28px) |
+| 动画 | `--ease-*` / `--duration-*` | expo/quart/spring + fast/normal/slow |
+
+主题文件：`frontend/src/styles/theme.css`（同时覆盖 Element Plus CSS 变量）
 
 ## 3. 目录结构
 
