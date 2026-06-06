@@ -67,6 +67,7 @@ logs/
 
 # Claude
 .claude/
+CLAUDE.md
 
 # Bytecode
 *.pyo

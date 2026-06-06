@@ -64,7 +64,6 @@ AI_APP/
 │   └── model_design_and_training_log.md
 ├── storage/                  # 用户上传文件 & 日志（不跟踪）
 ├── requirements.txt          # Python 依赖
-└── CLAUDE.md                 # Claude Code 项目配置
 ```
 
 ## 数据集
