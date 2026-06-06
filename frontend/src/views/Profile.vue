@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="section-header">
       <span class="section-label">个人中心</span>
-      <h2>{{ auth.user?.username }}</h2>
+      <h2>{{ userInfo?.username }}</h2>
       <p class="section-desc">管理您的账户信息与安全设置</p>
     </div>
 
@@ -10,20 +10,20 @@
       <!-- 左侧用户信息 -->
       <div class="profile-card user-card">
         <div class="user-card__avatar">
-          <span>{{ auth.user?.username?.charAt(0)?.toUpperCase() }}</span>
+          <span>{{ (userInfo?.username || '?').charAt(0).toUpperCase() }}</span>
         </div>
-        <h3>{{ auth.user?.username }}</h3>
-        <p class="user-card__email">{{ auth.user?.email }}</p>
-        <span class="user-card__role" :class="`role--${auth.user?.role}`">
-          {{ auth.user?.role === 'admin' ? '管理员' : '普通用户' }}
+        <h3>{{ userInfo?.username }}</h3>
+        <p class="user-card__email">{{ userInfo?.email }}</p>
+        <span class="user-card__role" :class="`role--${userInfo?.role}`">
+          {{ userInfo?.role === 'admin' ? '管理员' : '普通用户' }}
         </span>
         <div class="user-card__meta">
           <div class="meta-item">
-            <span class="meta-value">{{ auth.user?.predictions_count || 0 }}</span>
+            <span class="meta-value">{{ userInfo?.predictions_count ?? 0 }}</span>
             <span class="meta-label">预测次数</span>
           </div>
           <div class="meta-item">
-            <span class="meta-value">{{ auth.user?.date_joined ? new Date(auth.user.date_joined).toLocaleDateString('zh-CN') : '—' }}</span>
+            <span class="meta-value">{{ userInfo?.date_joined ? new Date(userInfo.date_joined).toLocaleDateString('zh-CN') : '—' }}</span>
             <span class="meta-label">注册日期</span>
           </div>
         </div>
@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { authAPI } from '../api/client'
 import { ElMessage } from 'element-plus'
@@ -75,6 +75,18 @@ const pwdForm = ref({ old_password: '', new_password: '' })
 const pwdLoading = ref(false)
 const showOld = ref(false)
 const showNew = ref(false)
+const userInfo = ref(auth.user || {})
+
+// 页面加载时从服务器获取最新用户信息（确保 predictions_count 等准确）
+onMounted(async () => {
+  try {
+    const res = await authAPI.get('/auth/me/')
+    userInfo.value = res.data
+    // 同步更新 auth store 和 localStorage
+    auth.user = res.data
+    localStorage.setItem('user', JSON.stringify(res.data))
+  } catch {}
+})
 
 async function changePwd() {
   if (pwdForm.value.new_password.length < 6) {

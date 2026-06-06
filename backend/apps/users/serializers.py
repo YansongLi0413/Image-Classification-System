@@ -37,9 +37,19 @@ class LoginSerializer(serializers.Serializer):
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
+    predictions_count = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'avatar', 'role', 'date_joined', 'last_login']
+        fields = ['id', 'username', 'email', 'avatar', 'role',
+                  'date_joined', 'last_login', 'predictions_count']
+
+    def get_predictions_count(self, obj) -> int:
+        """返回用户预测记录总数"""
+        try:
+            return obj.predictions.count()
+        except Exception:
+            return 0
 
 
 class ChangePasswordSerializer(serializers.Serializer):
