@@ -96,3 +96,6 @@ dmypy.json
 *.rar
 docs/figures/
 storage/
+# Generated documents (local only)
+docs/*.docx
+docs/*.doc
