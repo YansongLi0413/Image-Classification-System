@@ -330,6 +330,10 @@ add_table(
     ]
 )
 
+add_figure('distribution_caltech101.png', '图2-1 Caltech-101 数据集类别分布图')
+add_figure('distribution_oxford102.png', '图2-2 Oxford 102 Flower 数据集类别分布图')
+add_figure('distribution_comparison.png', '图2-3 两组数据集类别分布对比（左：Caltech-101，右：Oxford 102）')
+
 add_heading2('2.2 数据清洗')
 
 add_body('数据清洗是保证模型训练质量的基础环节。针对两个数据集的实际情况，执行了以下清洗操作：')
