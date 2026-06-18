@@ -200,11 +200,11 @@ const features = [
 ]
 
 const modelList = [
-  { name: 'efficientnet', displayName: 'EfficientNet-B1', type: '迁移学习', accuracy: 0.95, color: '#388e56' },
-  { name: 'densenet', displayName: 'DenseNet-121', type: '迁移学习', accuracy: 0.95, color: '#2a4a8a' },
-  { name: 'resnet50', displayName: 'ResNet-50', type: '迁移学习', accuracy: 0.93, color: '#4a6db5' },
+  { name: 'efficientnet', displayName: 'EfficientNet-B1', type: '迁移学习', accuracy: 0.93, color: '#388e56' },
+  { name: 'densenet', displayName: 'DenseNet-121', type: '迁移学习', accuracy: 0.93, color: '#2a4a8a' },
+  { name: 'resnet50', displayName: 'ResNet-50', type: '迁移学习', accuracy: 0.92, color: '#4a6db5' },
   { name: 'vit', displayName: 'ViT-B/16', type: 'Transformer', accuracy: 0.92, color: '#7c3a5e' },
-  { name: 'custom_cnn', displayName: 'Custom CNN', type: '从头训练', accuracy: 0.90, color: '#b8922a' },
+  { name: 'custom_cnn', displayName: 'Custom CNN', type: '从头训练', accuracy: 0.91, color: '#b8922a' },
 ]
 </script>
 

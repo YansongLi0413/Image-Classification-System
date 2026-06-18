@@ -153,16 +153,16 @@ const dragover = ref(false)
 const fileInput = ref(null)
 
 const allModels = ref([
-  { name: 'custom_cnn', display_name: 'Custom CNN', dataset_name: 'caltech101', accuracy: 0.90, file_size_mb: 35 },
-  { name: 'resnet50', display_name: 'ResNet-50', dataset_name: 'caltech101', accuracy: 0.93, file_size_mb: 94 },
-  { name: 'efficientnet_b1', display_name: 'EfficientNet-B1', dataset_name: 'caltech101', accuracy: 0.95, file_size_mb: 28 },
-  { name: 'vit_b16', display_name: 'ViT-B/16', dataset_name: 'caltech101', accuracy: 0.92, file_size_mb: 330 },
-  { name: 'densenet121', display_name: 'DenseNet-121', dataset_name: 'caltech101', accuracy: 0.95, file_size_mb: 30 },
-  { name: 'custom_cnn', display_name: 'Custom CNN', dataset_name: 'oxford102', accuracy: 0.90, file_size_mb: 35 },
-  { name: 'resnet50', display_name: 'ResNet-50', dataset_name: 'oxford102', accuracy: 0.93, file_size_mb: 94 },
-  { name: 'efficientnet_b1', display_name: 'EfficientNet-B1', dataset_name: 'oxford102', accuracy: 0.95, file_size_mb: 28 },
-  { name: 'vit_b16', display_name: 'ViT-B/16', dataset_name: 'oxford102', accuracy: 0.92, file_size_mb: 330 },
-  { name: 'densenet121', display_name: 'DenseNet-121', dataset_name: 'oxford102', accuracy: 0.95, file_size_mb: 30 },
+  { name: 'custom_cnn', display_name: 'Custom CNN', dataset_name: 'caltech101', accuracy: 0.77, file_size_mb: 43 },
+  { name: 'resnet50', display_name: 'ResNet-50', dataset_name: 'caltech101', accuracy: 0.92, file_size_mb: 91 },
+  { name: 'efficientnet_b1', display_name: 'EfficientNet-B1', dataset_name: 'caltech101', accuracy: 0.93, file_size_mb: 26 },
+  { name: 'vit_b16', display_name: 'ViT-B/16', dataset_name: 'caltech101', accuracy: 0.92, file_size_mb: 328 },
+  { name: 'densenet121', display_name: 'DenseNet-121', dataset_name: 'caltech101', accuracy: 0.93, file_size_mb: 28 },
+  { name: 'custom_cnn', display_name: 'Custom CNN', dataset_name: 'oxford102', accuracy: 0.91, file_size_mb: 43 },
+  { name: 'resnet50', display_name: 'ResNet-50', dataset_name: 'oxford102', accuracy: 0.99, file_size_mb: 91 },
+  { name: 'efficientnet_b1', display_name: 'EfficientNet-B1', dataset_name: 'oxford102', accuracy: 0.99, file_size_mb: 26 },
+  { name: 'vit_b16', display_name: 'ViT-B/16', dataset_name: 'oxford102', accuracy: 0.99, file_size_mb: 328 },
+  { name: 'densenet121', display_name: 'DenseNet-121', dataset_name: 'oxford102', accuracy: 0.99, file_size_mb: 28 },
 ])
 
 const availableModels = computed(() => allModels.value.filter(m => m.dataset_name === dataset.value))
