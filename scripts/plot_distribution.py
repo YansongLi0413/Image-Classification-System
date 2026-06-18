@@ -71,16 +71,18 @@ def plot_horizontal(dataset_key, title, colormap_name):
     ax.axvline(x=median_val, color='#e74c3c', linestyle='--', linewidth=1.2, alpha=0.7,
                label=f'中位数: {median_val:.0f}')
 
-    # 统计信息框
-    stats_text = (f'类别数: {n}    |    图片总数: {total}    |    '
-                  f'平均每类: {mean_val:.0f}    |    最少: {min(counts)}    |    最多: {max(counts)}')
-    ax.text(0.5, 1.01, stats_text, transform=ax.transAxes, fontsize=10,
-            ha='center', va='bottom',
-            bbox=dict(boxstyle='round,pad=0.5', facecolor='#fafafa', alpha=0.9, edgecolor='#ddd'))
+    # 统计信息框 — 放在右下角图内，避免与标题重叠
+    stats_text = (f'类别数: {n}    图片总数: {total}\n'
+                  f'平均/类: {mean_val:.0f}    中位数: {median_val:.0f}\n'
+                  f'最少: {min(counts)}    最多: {max(counts)}')
+    ax.text(0.97, 0.03, stats_text, transform=ax.transAxes, fontsize=9,
+            ha='right', va='bottom',
+            bbox=dict(boxstyle='round,pad=0.6', facecolor='white', alpha=0.92,
+                      edgecolor='#ccc', linewidth=0.8))
 
     ax.set_xlabel('图片数量', fontsize=13)
-    ax.set_title(title, fontsize=15, fontweight='bold', pad=20)
-    ax.legend(loc='lower right', fontsize=10, framealpha=0.9)
+    ax.set_title(title, fontsize=15, fontweight='bold', pad=12)
+    ax.legend(loc='lower left', fontsize=10, framealpha=0.9)
     ax.invert_yaxis()
     ax.grid(axis='x', alpha=0.25, linestyle='-')
     ax.set_xlim(0, max(counts) * 1.18)
