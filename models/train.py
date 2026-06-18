@@ -271,12 +271,12 @@ def train_model(model_name, dataset_name, epochs=50, batch_size=32,
             dataset_name=dataset_name,
         )
 
-        # Custom CNN 从零训练：不适用类别权重和标签平滑（会破坏梯度）
+        # Custom CNN 从零训练：使用轻量标签平滑 + 更强正则化防止过拟合
         trainer.train(
             train_loader=train_loader, val_loader=val_loader,
-            epochs=epochs, lr=0.001, weight_decay=1e-4,
-            scheduler_patience=5, early_stop_patience=10,
-            class_weight=None, label_smoothing=0.0,
+            epochs=80, lr=0.001, weight_decay=5e-4,
+            scheduler_patience=5, early_stop_patience=12,
+            class_weight=None, label_smoothing=0.05,
         )
 
         final_best = trainer.best_acc
